@@ -52,9 +52,9 @@ async function migrate() {
     console.log('Generating migrations...')
     await execAsync('drizzle-kit generate')
     
-    // Applying migrations
+    // Applying migrations (强制使用最新版 wrangler@latest 适配 Cloudflare 最新 D1 接口)
     console.log(`Applying migrations to ${mode} database: ${dbName}`)
-    await execAsync(`wrangler d1 migrations apply ${dbName} --${mode} --yes`)
+    await execAsync(`npx -y wrangler@latest d1 migrations apply ${dbName} --${mode}`)
 
     console.log('Migration completed successfully!')
   } catch (error) {
